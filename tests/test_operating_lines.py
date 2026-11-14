@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 from operating_lines import rectifying_y, q_line_y, intersection, stripping_y
 
-
+#McCabe-Thiele operating lines tests
 def test_rectifying_y_through_xD():
     assert rectifying_y(0.6, 2.0, 0.6) == pytest.approx(0.6)
 

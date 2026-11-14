@@ -29,7 +29,7 @@ header[data-testid="stHeader"] { background: transparent; }
     text-transform: uppercase;
     color: #8F8A7D;
 }
-.eyebrow .dot { color: #3DBA6F; margin-right: 6px; }
+.eyebrow .dot { color: #E5484D; margin-right: 6px; }
 
 .hero {
     font-family: 'Inter Tight', sans-serif;
@@ -41,7 +41,7 @@ header[data-testid="stHeader"] { background: transparent; }
     margin: 0.7rem 0 1.1rem 0;
 }
 .hero .muted { color: #8F8A7D; }
-.hero .accent { color: #3DBA6F; }
+.hero .accent { color: #E5484D; }
 
 .lede {
     font-size: 1.1rem;
