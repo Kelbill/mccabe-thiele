@@ -1,18 +1,26 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
 
 from equilibrium import y_eq
 from operating_lines import intersection
 from stages import step_stages
 
-plt.rcParams["font.family"] = "monospace"
+_font = Path(__file__).parent.parent / "fonts" / "Oswald-Regular.ttf"
+if _font.exists():
+    font_manager.fontManager.addfont(str(_font))
+    plt.rcParams["font.family"] = "Oswald"
+else:
+    plt.rcParams["font.family"] = "sans-serif"
 
 BG = "#211F1A"
 INK = "#F2EFE6"
 MUTED = "#8F8A7D"
 GRID = "#34312A"
 RED = "#E5484D"
-RECT = "#F0884D"    # orange
+RECT = "#E8B84A"    # amber
 STRIP = "#5B9BE0"   # blue
 QLINE = "#B48AE8"   # purple
 
@@ -37,16 +45,16 @@ def make_diagram(alpha, R, xD, q, xF, xB):
 
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    ax.set_xlabel("X  (LIQUID MOLE FRACTION)", color=MUTED, fontsize=8)
-    ax.set_ylabel("Y  (VAPOR MOLE FRACTION)", color=MUTED, fontsize=8)
+    ax.set_xlabel("X  (LIQUID MOLE FRACTION)", color=MUTED, fontsize=9)
+    ax.set_ylabel("Y  (VAPOR MOLE FRACTION)", color=MUTED, fontsize=9)
 
-    ax.tick_params(colors=MUTED, labelsize=8)
+    ax.tick_params(colors=MUTED, labelsize=9)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
     for side in ("left", "bottom"):
         ax.spines[side].set_color(GRID)
     ax.grid(True, color=GRID, lw=0.8)
-    ax.legend(frameon=False, labelcolor=INK, fontsize=8, loc="lower right")
+    ax.legend(frameon=False, labelcolor=INK, fontsize=9, loc="lower right")
 
     fig.tight_layout()
     return fig

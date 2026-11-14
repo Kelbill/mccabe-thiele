@@ -15,28 +15,32 @@ st.set_page_config(page_title="McCabe-Thiele", layout="centered")
 st.markdown(
     """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap');
 
-.stApp, .stApp p, .stApp label { font-family: 'Inter', sans-serif; }
+.stApp, .stApp p, .stApp label, .stApp span, .stApp div {
+    font-family: 'Oswald', sans-serif;
+}
 #MainMenu, footer { visibility: hidden; }
 .block-container { padding-top: 5rem; max-width: 760px; }
 header[data-testid="stHeader"] { background: transparent; }
 
 .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #8F8A7D;
 }
-.eyebrow .dot { color: #E5484D; margin-right: 6px; }
+.eyebrow .dot { color: #E5484D; margin-right: 8px; }
 
 .hero {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: clamp(2.6rem, 7vw, 4.2rem);
-    font-weight: 800;
-    line-height: 1.02;
-    letter-spacing: -0.045em;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 4.6rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
     color: #F2EFE6;
     margin: 0.7rem 0 1.1rem 0;
 }
@@ -44,26 +48,30 @@ header[data-testid="stHeader"] { background: transparent; }
 .hero .accent { color: #E5484D; }
 
 .lede {
+    font-family: 'Oswald', sans-serif;
     font-size: 1.1rem;
+    font-weight: 300;
     line-height: 1.6;
+    letter-spacing: 0.02em;
     color: #B9B4A7;
     max-width: 600px;
     margin-bottom: 1.4rem;
 }
 
 .tags-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #8F8A7D;
     margin-bottom: 0.5rem;
 }
 .pill {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    padding: 4px 12px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    padding: 3px 14px;
     margin: 0 6px 8px 0;
     background: #2A2721;
     border: 1px solid #3A362D;
@@ -72,10 +80,11 @@ header[data-testid="stHeader"] { background: transparent; }
 }
 
 .chart-title {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     color: #F2EFE6;
     margin: 1.4rem 0 0.2rem 0;
 }
@@ -88,29 +97,32 @@ header[data-testid="stHeader"] { background: transparent; }
     padding: 14px 18px;
 }
 [data-testid="stMetricLabel"] p {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    font-size: 0.75rem;
     color: #8F8A7D;
 }
 [data-testid="stMetricValue"] {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     color: #F2EFE6;
 }
 
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.8rem;
+    font-family: 'Oswald', sans-serif !important;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
     color: #B9B4A7;
 }
 [data-testid="stSliderThumbValue"],
 [data-testid="stSliderTickBarMin"],
 [data-testid="stSliderTickBarMax"] {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: 'Oswald', sans-serif !important;
 }
+[data-testid="stSlider"] [role="slider"] { background-color: #E5484D !important; }
+[data-testid="stSliderThumbValue"] { color: #E5484D !important; }
 </style>
 
 <div class="eyebrow"><span class="dot">●</span>Chemical engineering · Separation processes</div>
