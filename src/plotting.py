@@ -11,6 +11,9 @@ GRAY = "#6B665B"
 MUTED = "#8F8A7D"
 GREEN = "#1B7A43"
 GRID = "#E8E5DB"
+RECT = "#D9622B"    # burnt orange
+STRIP = "#2F6DB5"   # blue
+QLINE = "#8A5CC2"   # purple
 
 
 def make_diagram(alpha, R, xD, q, xF, xB):
@@ -24,9 +27,9 @@ def make_diagram(alpha, R, xD, q, xF, xB):
     x_curve = np.linspace(0, 1, 200)
     ax.plot(x_curve, y_eq(x_curve, alpha), color=INK, lw=2.2, label="Equilibrium curve")
     ax.plot([0, 1], [0, 1], color=MUTED, ls="--", lw=1, label="y = x")
-    ax.plot([xi, xD], [yi, xD], color=GRAY, lw=1.8, label="Rectifying line")
-    ax.plot([xB, xi], [xB, yi], color=GRAY, lw=1.8, ls="-.", label="Stripping line")
-    ax.plot([xF, xi], [xF, yi], color=MUTED, lw=1.5, ls=":", label="q-line")
+    ax.plot([xi, xD], [yi, xD], color=RECT, lw=2, label="Rectifying line")
+    ax.plot([xB, xi], [xB, yi], color=STRIP, lw=2, label="Stripping line")
+    ax.plot([xF, xi], [xF, yi], color=QLINE, lw=2, label="Q-line")
 
     xs, ys = zip(*points)
     ax.plot(xs, ys, color=GREEN, lw=2.4, label="Stages")

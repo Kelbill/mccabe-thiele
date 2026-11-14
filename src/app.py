@@ -19,7 +19,8 @@ st.markdown(
 
 .stApp, .stApp p, .stApp label { font-family: 'Inter', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
-.block-container { padding-top: 3rem; max-width: 760px; }
+.block-container { padding-top: 5rem; max-width: 760px; }
+header[data-testid="stHeader"] { background: transparent; }
 
 .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -88,6 +89,17 @@ st.markdown(
     font-weight: 800;
     letter-spacing: -0.02em;
     color: #1C1A15;
+}
+
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.8rem;
+    color: #4A4740;
+}
+[data-testid="stSliderThumbValue"],
+[data-testid="stSliderTickBarMin"],
+[data-testid="stSliderTickBarMax"] {
+    font-family: 'JetBrains Mono', monospace !important;
 }
 </style>
 
