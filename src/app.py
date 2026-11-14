@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import time
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
@@ -21,8 +22,12 @@ q = st.sidebar.slider("Feed condition (q)", -0.5, 2.0, 1.0, 0.05)
 q = round(q, 2)
 
 try:
+    t0 = time.perf_counter()
     fig = make_diagram(alpha, R, xD, q, xF, xB)
+    t1 = time.perf_counter()
     st.pyplot(fig)
+    t2 = time.perf_counter()
     plt.close(fig)
+    st.caption(f"calculate + draw: {t1 - t0:.2f}s | render to page: {t2 - t1:.2f}s")
 except ValueError as e:
     st.error(str(e))

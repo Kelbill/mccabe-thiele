@@ -7,12 +7,12 @@ from stages import step_stages
 
 
 def make_diagram(alpha, R, xD, q, xF, xB):
+
     n, feed_stage, points = step_stages(alpha, R, xD, q, xF, xB)
     xi, yi = intersection(R, xD, q, xF)
-
-    fig, ax = plt.subplots(figsize=(6, 6))
-
+    fig, ax = plt.subplots(figsize=(7, 7))
     x_curve = np.linspace(0, 1, 200)
+
     ax.plot(x_curve, y_eq(x_curve, alpha), label="Equilibrium curve")     # y_eq of x_curve
     ax.plot([0, 1], [0, 1], "k--", label="y = x")
 
