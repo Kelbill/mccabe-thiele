@@ -10,7 +10,7 @@ from stages import step_stages
 
 _fonts_dir = Path(__file__).parent.parent / "fonts"
 _family = "sans-serif"
-for _f in sorted(_fonts_dir.glob("Oswald*.ttf")):
+for _f in sorted(_fonts_dir.glob("Oswald-VariableFont_wght.ttf")):
     font_manager.fontManager.addfont(str(_f))
     _family = font_manager.FontProperties(fname=str(_f)).get_name()
 plt.rcParams["font.family"] = _family
