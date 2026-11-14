@@ -92,3 +92,26 @@ def intersection(R, xD, q, xF):
     y_intersect = rectifying_y(x_intersect, R, xD)  # or q_line_y(x_intersect, q, xF), should give same result
     
     return x_intersect, y_intersect
+
+def stripping_y(x, R, xB):
+    """
+    Calculate the y value on the stripping line for a given x, reflux ratio R, and bottom composition xB.
+    
+    Parameters:
+    x : float or np.ndarray
+        The mole fraction of the more volatile component in the liquid phase.
+    R : float
+        The reflux ratio (must be greater than 0).
+    xB : float
+        The mole fraction of the more volatile component in the bottoms (must be between 0 and 1).
+    
+    Returns:
+    y : float or np.ndarray
+        The mole fraction of the more volatile component in the vapor phase on the stripping line.
+    """
+    if R <= 0:
+        raise ValueError(f"Reflux ratio R must be greater than 0, got {R}")
+    _check_composition(xB, "xB")
+    
+    y = (R / (R + 1)) * x + (1 / (R + 1)) * xB
+    return y
