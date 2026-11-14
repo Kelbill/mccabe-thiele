@@ -29,7 +29,7 @@ header[data-testid="stHeader"] { background: transparent; }
     text-transform: uppercase;
     color: #8F8A7D;
 }
-.eyebrow .dot { color: #1B7A43; margin-right: 6px; }
+.eyebrow .dot { color: #3DBA6F; margin-right: 6px; }
 
 .hero {
     font-family: 'Inter Tight', sans-serif;
@@ -37,16 +37,16 @@ header[data-testid="stHeader"] { background: transparent; }
     font-weight: 800;
     line-height: 1.02;
     letter-spacing: -0.045em;
-    color: #1C1A15;
+    color: #F2EFE6;
     margin: 0.7rem 0 1.1rem 0;
 }
 .hero .muted { color: #8F8A7D; }
-.hero .accent { color: #1B7A43; }
+.hero .accent { color: #3DBA6F; }
 
 .lede {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #4A4740;
+    color: #B9B4A7;
     max-width: 600px;
     margin-bottom: 1.4rem;
 }
@@ -65,15 +65,25 @@ header[data-testid="stHeader"] { background: transparent; }
     font-size: 0.78rem;
     padding: 4px 12px;
     margin: 0 6px 8px 0;
-    background: #F3F1EA;
-    border: 1px solid #E5E2D8;
+    background: #2A2721;
+    border: 1px solid #3A362D;
     border-radius: 8px;
-    color: #4A4740;
+    color: #B9B4A7;
 }
 
+.chart-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #F2EFE6;
+    margin: 1.4rem 0 0.2rem 0;
+}
+.chart-title .muted { color: #8F8A7D; }
+
 [data-testid="stMetric"] {
-    background: #F3F1EA;
-    border: 1px solid #E5E2D8;
+    background: #2A2721;
+    border: 1px solid #3A362D;
     border-radius: 12px;
     padding: 14px 18px;
 }
@@ -88,13 +98,13 @@ header[data-testid="stHeader"] { background: transparent; }
     font-family: 'Inter Tight', sans-serif;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #1C1A15;
+    color: #F2EFE6;
 }
 
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.8rem;
-    color: #4A4740;
+    color: #B9B4A7;
 }
 [data-testid="stSliderThumbValue"],
 [data-testid="stSliderTickBarMin"],
@@ -129,6 +139,11 @@ try:
     c1.metric("Theoretical stages", n)
     c2.metric("Feed stage", feed_stage)
     c3.metric("Line intersection", f"({xi:.2f}, {yi:.2f})")
+
+    st.markdown(
+        f'<div class="chart-title">{n} stages<span class="muted">, feed on stage {feed_stage}.</span></div>',
+        unsafe_allow_html=True,
+    )
 
     fig = make_diagram(alpha, R, xD, q, xF, xB)
     st.pyplot(fig)

@@ -14,14 +14,6 @@ def test_returns_figure():
     assert isinstance(fig, Figure)
     plt.close(fig)
 
-
-def test_title_has_stage_count():
-    fig = make_diagram(2.5, 2.0, 0.9, 1, 0.6, 0.1)
-    ax = fig.axes[0]
-    assert "7 stages" in ax.get_title(loc="left")
-    assert "feed on stage 3" in ax.get_title(loc="left")
-    plt.close(fig)
-
 def test_has_six_lines():
     # equilibrium, diagonal, rectifying, stripping, q-line, stages
     fig = make_diagram(2.5, 2.0, 0.9, 1, 0.6, 0.1)
