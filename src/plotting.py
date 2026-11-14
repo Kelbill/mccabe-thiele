@@ -8,12 +8,12 @@ from equilibrium import y_eq
 from operating_lines import intersection
 from stages import step_stages
 
-_font = Path(__file__).parent.parent / "fonts" / "Oswald-Regular.ttf"
-if _font.exists():
-    font_manager.fontManager.addfont(str(_font))
-    plt.rcParams["font.family"] = "Oswald"
-else:
-    plt.rcParams["font.family"] = "sans-serif"
+_fonts_dir = Path(__file__).parent.parent / "fonts"
+_family = "sans-serif"
+for _f in sorted(_fonts_dir.glob("Oswald*.ttf")):
+    font_manager.fontManager.addfont(str(_f))
+    _family = font_manager.FontProperties(fname=str(_f)).get_name()
+plt.rcParams["font.family"] = _family
 
 PALETTES = {
     "light": {
@@ -70,7 +70,8 @@ def make_diagram(alpha, R, xD, q, xF, xB, dark=False):
     for side in ("left", "bottom"):
         ax.spines[side].set_color(c["GRID"])
     ax.grid(True, color=c["GRID"], lw=0.8)
-    ax.legend(frameon=False, labelcolor=c["INK"], fontsize=9, loc="lower right")
+    ax.legend(frameon=False, labelcolor=c["INK"], fontsize=9, loc="lower right",
+              prop={"family": _family, "size": 9})
 
     fig.tight_layout()
     return fig

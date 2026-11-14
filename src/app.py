@@ -159,6 +159,24 @@ header[data-testid="stHeader"] { background: transparent; }
 }
 [data-testid="stSlider"] [role="slider"] { background-color: __RED__ !important; }
 [data-testid="stSliderThumbValue"] { color: __RED__ !important; }
+
+/* dark mode toggle: visible track when off, red when on */
+[data-testid="stSidebar"] [data-baseweb="checkbox"] > span:first-child {
+    background-color: __MUTED__ !important;
+    border: 1px solid __MUTED__ !important;
+}
+[data-testid="stSidebar"] [data-baseweb="checkbox"]:has(input:checked) > span:first-child {
+    background-color: __RED__ !important;
+    border-color: __RED__ !important;
+}
+[data-testid="stSidebar"] [data-baseweb="checkbox"] > span:first-child > div {
+    background-color: #FFFFFF !important;
+}
+[data-testid="stSidebar"] [data-baseweb="checkbox"] p {
+    font-family: 'Oswald', sans-serif !important;
+    letter-spacing: 0.04em;
+    color: __SOFT__;
+}
 </style>
 """
 
