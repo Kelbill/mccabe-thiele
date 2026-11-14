@@ -1,4 +1,5 @@
 from equilibrium import _check_composition
+import numpy as np
 
 def rectifying_y(x, R, xD):
     """
@@ -16,11 +17,16 @@ def rectifying_y(x, R, xD):
     y : float or np.ndarray
         The mole fraction of the more volatile component in the vapor phase on the rectifying line.
     """
+    x = np.asarray(x, dtype=float)
+    R = float(R)
+    xD = float(xD)
+        
     if R <= 0:
         raise ValueError(f"Reflux ratio R must be greater than 0, got {R}")
     _check_composition(xD, "xD")
     
     y = (R / (R + 1)) * x + (1 / (R + 1)) * xD
+    y = np.asarray(y, dtype=float)
     return y
 
 def q_line_y(x, q, xF):
@@ -39,11 +45,16 @@ def q_line_y(x, q, xF):
     y : float or np.ndarray
         The mole fraction of the more volatile component in the vapor phase on the q-line.
     """
-    if not (0 <= q <= 1):
-        raise ValueError(f"Feed quality q must be between 0 and 1, got {q}")
+    x = np.asarray(x, dtype=float)
+    q = float(q)
+    xF = float(xF)
+        
+    if (q == 1):
+        raise ValueError(f"Feed quality q must be exactly 1, got {q}")
     _check_composition(xF, "xF")
     
-    y = (q / (q + 1)) * x + (1 / (q + 1)) * xF
+    y = (q / (q - 1)) * x - (xF / (q - 1))
+    y = np.asarray(y, dtype=float)
     return y
 
 def intersection(R, xD, q, xF):
@@ -66,6 +77,11 @@ def intersection(R, xD, q, xF):
     y_intersect : float
         The mole fraction of the more volatile component in the vapor phase at the intersection point.
     """
+    R = float(R)
+    xD = float(xD)
+    q = float(q)
+    xF = float(xF)
+
     if R <= 0:
         raise ValueError(f"Reflux ratio R must be greater than 0, got {R}")
     if not (0 <= q <= 1):
@@ -109,9 +125,15 @@ def stripping_y(x, R, xB):
     y : float or np.ndarray
         The mole fraction of the more volatile component in the vapor phase on the stripping line.
     """
+
+    x = np.asarray(x, dtype=float)
+    R = float(R)
+    xB = float(xB)
+        
     if R <= 0:
         raise ValueError(f"Reflux ratio R must be greater than 0, got {R}")
     _check_composition(xB, "xB")
     
     y = (R / (R + 1)) * x + (1 / (R + 1)) * xB
+    y = np.asarray(y, dtype=float)
     return y

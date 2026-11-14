@@ -1,6 +1,7 @@
 import numpy as np
 
 def _check_composition(value, name):
+    value = np.asarray(value, dtype=float)
     if np.any(value < 0) or np.any(value > 1):
         raise ValueError(f"{name} must be between 0 and 1, got min={value.min()}, max={value.max()}")
     return
