@@ -97,7 +97,7 @@ def intersection(R, xD, q, xF):
     # (R / (R + 1)) * x + (1 / (R + 1)) * xD = (q / (q - 1)) * x - (xF / (q - 1))
     
     a = R / (R + 1) - q / (q - 1)
-    b = (1 / (R + 1)) * xD - (1 / (q - 1)) * xF
+    b = -(1 / (R + 1)) * xD - (xF / (q - 1)) 
 
     #the eq becomes a*x = b, solve for x, x_intersect = b / a
     
@@ -109,7 +109,7 @@ def intersection(R, xD, q, xF):
     
     return x_intersect, y_intersect
 
-def stripping_y(x, R, xB):
+def stripping_y(x, R, xD, q, xF, xB):
     """
     Calculate the y value on the stripping line for a given x, reflux ratio R, and bottom composition xB.
     
@@ -125,7 +125,7 @@ def stripping_y(x, R, xB):
     y : float or np.ndarray
         The mole fraction of the more volatile component in the vapor phase on the stripping line.
     """
-    xi, yi = intersection(R, 0, 1, xB)  # Validate inputs
+    xi, yi = intersection(R, xD, q, xF)  # Validate inputs
     x = np.asarray(x, dtype=float)
     R = float(R)
     xB = float(xB)
