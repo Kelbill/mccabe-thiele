@@ -48,7 +48,7 @@ def q_line_y(x, q, xF):
     x = np.asarray(x, dtype=float)
     q = float(q)
     xF = float(xF)
-        
+        hi
     if (q == 1):
         raise ValueError(f"Feed quality q must not be exactly 1, got {q}")
     _check_composition(xF, "xF")
@@ -94,6 +94,7 @@ def intersection(R, xD, q, xF):
     # Set them equal to find intersection:
 
     # (R / (R + 1)) * x + (1 / (R + 1)) * xD = (q / (q - 1)) * x - (xF / (q - 1))
+    
     if q == 1:
         x_intersect = xF  # If q=1, the q-line is vertical at x=xF
         y_intersect = rectifying_y(x_intersect, R, xD)
