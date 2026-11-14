@@ -12,17 +12,51 @@ from operating_lines import intersection
 
 st.set_page_config(page_title="McCabe-Thiele", layout="centered")
 
-st.markdown(
-    """
+THEMES = {
+    "light": {
+        "BG": "#FBFAF6",
+        "SURF": "#F3F1EA",
+        "BORDER": "#E5E2D8",
+        "INK": "#1C1A15",
+        "MUTED": "#8F8A7D",
+        "SOFT": "#4A4740",
+        "RED": "#E5484D",
+    },
+    "dark": {
+        "BG": "#211F1A",
+        "SURF": "#2A2721",
+        "BORDER": "#3A362D",
+        "INK": "#F2EFE6",
+        "MUTED": "#8F8A7D",
+        "SOFT": "#B9B4A7",
+        "RED": "#E5484D",
+    },
+}
+
+dark = st.sidebar.toggle("Dark mode", value=False)
+theme = THEMES["dark" if dark else "light"]
+
+CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap');
 
-.stApp, .stApp p, .stApp label, .stApp span, .stApp div {
+.stApp {
+    background-color: __BG__;
     font-family: 'Oswald', sans-serif;
 }
+.stApp p, .stApp label { font-family: 'Oswald', sans-serif; }
+
+/* keep Streamlit's icons on their own font */
+[data-testid="stIconMaterial"],
+span.material-icons,
+span[class*="material-symbols"] {
+    font-family: 'Material Symbols Rounded' !important;
+}
+
 #MainMenu, footer { visibility: hidden; }
 .block-container { padding-top: 5rem; max-width: 760px; }
 header[data-testid="stHeader"] { background: transparent; }
+[data-testid="stSidebar"] { background-color: __SURF__; }
 
 .eyebrow {
     font-family: 'Oswald', sans-serif;
@@ -30,9 +64,9 @@ header[data-testid="stHeader"] { background: transparent; }
     font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #8F8A7D;
+    color: __MUTED__;
 }
-.eyebrow .dot { color: #E5484D; margin-right: 8px; }
+.eyebrow .dot { color: __RED__; margin-right: 8px; }
 
 .hero {
     font-family: 'Oswald', sans-serif;
@@ -41,11 +75,11 @@ header[data-testid="stHeader"] { background: transparent; }
     line-height: 1.0;
     letter-spacing: 0.01em;
     text-transform: uppercase;
-    color: #F2EFE6;
+    color: __INK__;
     margin: 0.7rem 0 1.1rem 0;
 }
-.hero .muted { color: #8F8A7D; }
-.hero .accent { color: #E5484D; }
+.hero .muted { color: __MUTED__; }
+.hero .accent { color: __RED__; }
 
 .lede {
     font-family: 'Oswald', sans-serif;
@@ -53,7 +87,7 @@ header[data-testid="stHeader"] { background: transparent; }
     font-weight: 300;
     line-height: 1.6;
     letter-spacing: 0.02em;
-    color: #B9B4A7;
+    color: __SOFT__;
     max-width: 600px;
     margin-bottom: 1.4rem;
 }
@@ -63,7 +97,7 @@ header[data-testid="stHeader"] { background: transparent; }
     font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #8F8A7D;
+    color: __MUTED__;
     margin-bottom: 0.5rem;
 }
 .pill {
@@ -73,10 +107,10 @@ header[data-testid="stHeader"] { background: transparent; }
     letter-spacing: 0.06em;
     padding: 3px 14px;
     margin: 0 6px 8px 0;
-    background: #2A2721;
-    border: 1px solid #3A362D;
+    background: __SURF__;
+    border: 1px solid __BORDER__;
     border-radius: 8px;
-    color: #B9B4A7;
+    color: __SOFT__;
 }
 
 .chart-title {
@@ -85,14 +119,14 @@ header[data-testid="stHeader"] { background: transparent; }
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: #F2EFE6;
+    color: __INK__;
     margin: 1.4rem 0 0.2rem 0;
 }
-.chart-title .muted { color: #8F8A7D; }
+.chart-title .muted { color: __MUTED__; }
 
 [data-testid="stMetric"] {
-    background: #2A2721;
-    border: 1px solid #3A362D;
+    background: __SURF__;
+    border: 1px solid __BORDER__;
     border-radius: 12px;
     padding: 14px 18px;
 }
@@ -101,30 +135,39 @@ header[data-testid="stHeader"] { background: transparent; }
     text-transform: uppercase;
     letter-spacing: 0.14em;
     font-size: 0.75rem;
-    color: #8F8A7D;
+    color: __MUTED__;
 }
 [data-testid="stMetricValue"] {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
     letter-spacing: 0.01em;
-    color: #F2EFE6;
+    color: __INK__;
 }
 
-[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+[data-testid="stSidebar"] label p {
     font-family: 'Oswald', sans-serif !important;
     font-size: 0.95rem;
     letter-spacing: 0.04em;
-    color: #B9B4A7;
+    color: __SOFT__;
 }
 [data-testid="stSliderThumbValue"],
 [data-testid="stSliderTickBarMin"],
 [data-testid="stSliderTickBarMax"] {
     font-family: 'Oswald', sans-serif !important;
+    color: __SOFT__;
 }
-[data-testid="stSlider"] [role="slider"] { background-color: #E5484D !important; }
-[data-testid="stSliderThumbValue"] { color: #E5484D !important; }
+[data-testid="stSlider"] [role="slider"] { background-color: __RED__ !important; }
+[data-testid="stSliderThumbValue"] { color: __RED__ !important; }
 </style>
+"""
 
+for key, value in theme.items():
+    CSS = CSS.replace(f"__{key}__", value)
+st.markdown(CSS, unsafe_allow_html=True)
+
+st.markdown(
+    """
 <div class="eyebrow"><span class="dot">●</span>Chemical engineering · Separation processes</div>
 <div class="hero">McCabe-Thiele<span class="accent">.</span><br><span class="muted">Distillation, stage</span><br>by stage.</div>
 <div class="lede">Binary distillation with constant relative volatility. Move the sliders in the sidebar and the diagram, stage count, and feed stage update.</div>
@@ -157,7 +200,7 @@ try:
         unsafe_allow_html=True,
     )
 
-    fig = make_diagram(alpha, R, xD, q, xF, xB)
+    fig = make_diagram(alpha, R, xD, q, xF, xB, dark=dark)
     st.pyplot(fig)
     plt.close(fig)
 except ValueError as e:
