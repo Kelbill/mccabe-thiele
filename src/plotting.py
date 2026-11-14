@@ -11,7 +11,7 @@ BG = "#211F1A"
 INK = "#F2EFE6"
 MUTED = "#8F8A7D"
 GRID = "#34312A"
-GREEN = "#3DBA6F"
+RED = "#E5484D"
 RECT = "#F0884D"    # orange
 STRIP = "#5B9BE0"   # blue
 QLINE = "#B48AE8"   # purple
@@ -33,7 +33,7 @@ def make_diagram(alpha, R, xD, q, xF, xB):
     ax.plot([xF, xi], [xF, yi], color=QLINE, lw=2, label="q-line")
 
     xs, ys = zip(*points)
-    ax.plot(xs, ys, color=GREEN, lw=2.4, label="Stages")
+    ax.plot(xs, ys, color=RED, lw=2.4, label="Stages")
 
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
