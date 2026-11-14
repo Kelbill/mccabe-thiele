@@ -48,7 +48,7 @@ def q_line_y(x, q, xF):
     x = np.asarray(x, dtype=float)
     q = float(q)
     xF = float(xF)
-        hi
+    
     if (q == 1):
         raise ValueError(f"Feed quality q must not be exactly 1, got {q}")
     _check_composition(xF, "xF")
