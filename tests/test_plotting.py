@@ -7,7 +7,8 @@ from matplotlib.figure import Figure
 
 from plotting import make_diagram
 
-#make_diagram(alpha, R, xD, q, xF, xB)
+#Diagram tests for McCabe-Thiele method
+#make_diagram(alpha, R, xD, q, xF, xB) (for quick ref lang sa parameters)
 def test_returns_figure():
     fig = make_diagram(2.5, 2.0, 0.9, 1, 0.6, 0.1)
     assert isinstance(fig, Figure)
