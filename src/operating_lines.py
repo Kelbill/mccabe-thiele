@@ -50,7 +50,7 @@ def q_line_y(x, q, xF):
     xF = float(xF)
         
     if (q == 1):
-        raise ValueError(f"Feed quality q must be exactly 1, got {q}")
+        raise ValueError(f"Feed quality q must not be exactly 1, got {q}")
     _check_composition(xF, "xF")
     
     y = (q / (q - 1)) * x - (xF / (q - 1))
@@ -84,22 +84,22 @@ def intersection(R, xD, q, xF):
 
     if R <= 0:
         raise ValueError(f"Reflux ratio R must be greater than 0, got {R}")
-    if not (0 <= q <= 1):
-        raise ValueError(f"Feed quality q must be between 0 and 1, got {q}")
+    if (q == 1):
+        raise ValueError(f"Feed quality q must not be exactly 1, got {q}")
     _check_composition(xD, "xD")
     _check_composition(xF, "xF")
     
     # Solve for intersection point
     # Rectifying line: y = (R / (R + 1)) * x + (1 / (R + 1)) * xD
-    # Q-line: y = (q / (q + 1)) * x + (1 / (q + 1)) * xF
+    # Q-line: y = (q / (q - 1)) * x - (xF / (q - 1))
     # Set them equal to find intersection:
 
-    # (R / (R + 1)) * x + (1 / (R + 1)) * xD = (q / (q + 1)) * x + (1 / (q + 1)) * xF
+    # (R / (R + 1)) * x + (1 / (R + 1)) * xD = (q / (q - 1)) * x - (xF / (q - 1))
     
-    a = R / (R + 1) - q / (q + 1)
-    b = (1 / (R + 1)) * xD - (1 / (q + 1)) * xF
+    a = R / (R + 1) - q / (q - 1)
+    b = (1 / (R + 1)) * xD - (1 / (q - 1)) * xF
 
-    #the eq becomes a*x = b, solve for x, x_intersect = -b / a
+    #the eq becomes a*x = b, solve for x, x_intersect = b / a
     
     if a == 0:
         raise ValueError("The rectifying line and q-line are parallel; no intersection exists.")
@@ -125,7 +125,7 @@ def stripping_y(x, R, xB):
     y : float or np.ndarray
         The mole fraction of the more volatile component in the vapor phase on the stripping line.
     """
-
+    xi, yi = intersection(R, 0, 1, xB)  # Validate inputs
     x = np.asarray(x, dtype=float)
     R = float(R)
     xB = float(xB)
